@@ -477,6 +477,81 @@ function interpretFeedback(user_feedback = "") {
     result.extra_negative_terms.push("person","model","human body","hands","feet in frame");
   }
 
+  // ── Aparência do modelo (cabelo, tom de pele, idade) ──────────────────────
+  {
+    const hairMap = {
+      "morena":          { pos: "brunette model, dark brown hair",          neg: "blonde hair, light hair" },
+      "moreno":          { pos: "brunette model, dark brown hair",          neg: "blonde hair, light hair" },
+      "loira":           { pos: "blonde model, golden blonde hair",         neg: "dark hair, brunette, brown hair" },
+      "loiro":           { pos: "blonde model, golden blonde hair",         neg: "dark hair, brunette, brown hair" },
+      "ruiva":           { pos: "redhead model, red hair",                  neg: "blonde hair, dark hair" },
+      "ruivo":           { pos: "redhead model, red hair",                  neg: "blonde hair, dark hair" },
+      "cabelo preto":    { pos: "model with black hair",                    neg: "blonde hair, light hair, brown hair" },
+      "cabelo escuro":   { pos: "model with dark hair",                     neg: "blonde hair, light hair" },
+      "cabelo claro":    { pos: "model with light hair",                    neg: "dark hair, black hair" },
+      "cabelo branco":   { pos: "model with white hair, elegant senior",    neg: "dark hair, young model" },
+      "cabelo vermelho": { pos: "model with red hair",                      neg: "blonde hair, dark hair" },
+    };
+    const skinMap = {
+      "negra":        { pos: "Black woman model, dark skin tone",   neg: "light skin, pale skin" },
+      "negro":        { pos: "Black man model, dark skin tone",     neg: "light skin, pale skin" },
+      "parda":        { pos: "mixed race model, medium brown skin", neg: "very light skin, very dark skin" },
+      "pardo":        { pos: "mixed race model, medium brown skin", neg: "very light skin, very dark skin" },
+      "pele escura":  { pos: "model with dark skin tone",           neg: "light skin, pale skin" },
+      "pele clara":   { pos: "model with fair skin tone",           neg: "dark skin" },
+      "asiatica":     { pos: "Asian woman model",                   neg: "" },
+      "asiatico":     { pos: "Asian man model",                     neg: "" },
+    };
+    const ageMap = {
+      "jovem":   { pos: "young model, approximately 20-25 years old",      neg: "elderly, senior, middle-aged" },
+      "velha":   { pos: "elderly woman model, approximately 60-70 years old", neg: "young model, teenager" },
+      "velho":   { pos: "elderly man model, approximately 60-70 years old",   neg: "young model, teenager" },
+      "idosa":   { pos: "elderly woman model, approximately 65 years old",    neg: "young model" },
+      "idoso":   { pos: "elderly man model, approximately 65 years old",      neg: "young model" },
+      "crianca": { pos: "child model, approximately 6-10 years old",          neg: "adult model" },
+      "adulta":  { pos: "adult woman model",                                  neg: "child model" },
+      "adulto":  { pos: "adult man model",                                    neg: "child model" },
+    };
+
+    let applied = false;
+    for (const [kw, val] of Object.entries(hairMap)) {
+      if (text.includes(kw)) {
+        result.issue_types.push("model_appearance");
+        result.allowed_changes.push("model_hair","model_appearance");
+        result.extra_positive_notes.push(val.pos);
+        if (val.neg) result.extra_negative_terms.push(val.neg);
+        applied = true; break;
+      }
+    }
+    if (!applied) {
+      for (const [kw, val] of Object.entries(skinMap)) {
+        if (text.includes(kw)) {
+          result.issue_types.push("model_appearance");
+          result.allowed_changes.push("model_skin","model_appearance");
+          result.extra_positive_notes.push(val.pos);
+          if (val.neg) result.extra_negative_terms.push(val.neg);
+          applied = true; break;
+        }
+      }
+    }
+    if (!applied) {
+      for (const [kw, val] of Object.entries(ageMap)) {
+        if (text.includes(kw)) {
+          result.issue_types.push("model_appearance");
+          result.allowed_changes.push("model_age","model_appearance");
+          result.extra_positive_notes.push(val.pos);
+          if (val.neg) result.extra_negative_terms.push(val.neg);
+          applied = true; break;
+        }
+      }
+    }
+    if (!applied && hasAny(text, ["modelo diferente","outra modelo","outro modelo","muda o modelo","mudar modelo"])) {
+      result.issue_types.push("model_appearance");
+      result.allowed_changes.push("model_appearance");
+      result.extra_positive_notes.push("Use a different model with varied appearance.");
+    }
+  }
+
   result.issue_types = uniq(result.issue_types);
   result.allowed_changes = uniq(result.allowed_changes);
   result.extra_positive_notes = uniq(result.extra_positive_notes);
