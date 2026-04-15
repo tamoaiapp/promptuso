@@ -1,0 +1,9 @@
+{
+  "pos_add": [
+    "Tool is held safely in hand, no action."
+  ],
+  "neg_add": [
+    "No cutting.",
+    "No aggressive action."
+  ]
+}

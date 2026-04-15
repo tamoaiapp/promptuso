@@ -1,0 +1,9 @@
+{
+  "pos_add": [
+    "Product placed on floor in natural environment."
+  ],
+  "neg_add": [
+    "No floating.",
+    "No hand visible."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "pos_add": [
+    "Product is worn on the head by a person, correct orientation, realistic scale."
+  ],
+  "neg_add": [
+    "No hand holding.",
+    "No packaging.",
+    "No floating."
+  ]
+}

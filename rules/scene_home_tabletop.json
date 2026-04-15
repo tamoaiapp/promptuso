@@ -1,0 +1,9 @@
+{
+  "pos_add": [
+    "Product placed on a clean indoor table surface."
+  ],
+  "neg_add": [
+    "No hand visible.",
+    "No packaging."
+  ]
+}

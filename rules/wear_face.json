@@ -1,0 +1,9 @@
+{
+  "pos_add": [
+    "Product is worn on the face in correct human usage position."
+  ],
+  "neg_add": [
+    "No hand holding.",
+    "No packaging."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "pos_add": [
+    "Product placed on ground in sport environment."
+  ],
+  "neg_add": [
+    "No hand visible.",
+    "No packaging."
+  ]
+}

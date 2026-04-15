@@ -1,0 +1,14 @@
+{
+  "pos_add": [
+    "Product is worn crossbody or around the waist on a real person.",
+    "The strap crosses the chest or the bag sits on the hip.",
+    "Show the full product clearly — front panel must be visible.",
+    "Realistic natural pose, casual or active."
+  ],
+  "neg_add": [
+    "No hand holding the product up artificially.",
+    "No packaging.",
+    "No floating product.",
+    "Do not place the product on a table or floor."
+  ]
+}

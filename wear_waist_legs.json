@@ -1,0 +1,13 @@
+{
+  "pos_add": [
+    "Product is worn on the lower body (waist, hips, or legs), realistic fit.",
+    "Show the product in correct placement on the lower half of a real person.",
+    "The product must be clearly visible from waist to knee or ankle as appropriate."
+  ],
+  "neg_add": [
+    "No hand holding the product.",
+    "No packaging.",
+    "No floating product.",
+    "Do not place the product on the upper body."
+  ]
+}
